@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\ClientController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProduitsController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +20,25 @@ use App\Http\Controllers\ProfileController;
 */
 
 Route::get('/', function () {
-    User::create(["name"=>'admin','email'=>'e@e07.ma','password'=>Hash::make('admin')]);
-    return view('welcome');
+    User::create(['name' => 'admin', 'email' => 'e@e.ma', 'password' => Hash::make('admin')]);
+
 });
 
+Route::post('/Reservations',[ReservationController::class,'store']);
+Route::get('/Reservations',[ReservationController::class,'index']);
+Route::get('/Reservations/Nouveau',[ReservationController::class,'create']);
+Route::post('/Reservations/{id}',[ReservationController::class,'destroy']);
 
-Route::get('/Clients',[ClientController::class,'index']);
+
+Route::get('/Produits', [ProduitsController::class, 'index']);
+Route::post('/AjouterProduit', [ProduitsController::class, 'store'])->name('AjouterProduit');
+Route::post('/ModifierProduit/{client}', [ProduitsController::class, 'edite'])->name('ModifierProduit');
+Route::post('/DeleteProduit/{client}', [ProduitsController::class, 'destroy'])->name('DeleteProduit');
+
+Route::get('/Clients', [ClientController::class, 'index']);
+Route::post('/AjouterClient', [ClientController::class, 'store'])->name('AjouterClient');
+Route::post('/ModifierClient/{client}', [ClientController::class, 'Edite'])->name('ModifierClient');
+Route::post('/DeleteClient/{client}', [ClientController::class, 'destroy'])->name('DeleteClient');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('cin');
+            $table->string('cinrecto');
+            $table->string('cinverso');
             $table->date('dateNaissance');
             $table->string('ice');
             $table->string('email')->unique();

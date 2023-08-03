@@ -16,49 +16,48 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('Nreservation');
+            $table->string('object');
+            $table->date('datereservation');
             $table->foreignId('client')->constrained('clients');
 
             // Voyage
-            $table->foreignId('vproduit')->constrained('produits');
-            $table->foreignId('vprogramme')->constrained('programmes');
-            $table->foreignId('vhotel')->constrained('hotels');
-            $table->foreignId('vchambre')->constrained('chambres');
-            $table->date('vdateDepart');
-            $table->date('vdateRetoure');
-            $table->integer('vprixachat');
-            $table->integer('vprixvente');
-            $table->integer('vqte');
-            $table->integer('vtotal');
+            $table->foreignId('vproduit')->constrained('produits')->nullable();
+            $table->foreignId('vprogramme')->constrained('programmes')->nullable();
+            $table->foreignId('vhotel')->constrained('hotels')->nullable();
+            $table->foreignId('vchambre')->constrained('chambers')->nullable();
+            $table->date('vdateDepart')->nullable();
+            $table->date('vdateRetoure')->nullable();
+            $table->integer('vprixachat')->nullable()->default(0);
+            $table->integer('vprixvente')->nullable()->default(0);
+            $table->integer('vqte')->nullable()->default(0);
+            $table->integer('vtotal')->nullable()->default(0);
 
-            // Hotel 
+            // Hotel
 
-            $table->foreignId('hhotel')->constrained('hotels');
-            $table->foreignId('hpay')->constrained('pays');
-            $table->foreignId('hville')->constrained('vills');
-            $table->date('hdateDepart');
-            $table->date('hdateRetoure');
-            $table->integer('hprixachat');
-            $table->integer('hprixvente');
-            $table->integer('hqte');
-            $table->integer('htotal');
-
+            $table->foreignId('hhotel')->nullable()->constrained('hotels');
+            $table->foreignId('hpay')->constrained('pays')->nullable();
+            $table->foreignId('hville')->constrained('villes')->nullable();
+            $table->date('hdateDepart')->nullable();
+            $table->date('hdateRetoure')->nullable();
+            $table->integer('hprixachat')->nullable()->default(0);
+            $table->integer('hprixvente')->nullable()->default(0);
+            $table->integer('hqte')->nullable()->default(0);
+            $table->integer('htotal')->nullable()->default(0);
 
             // Billet
 
+            $table->foreignId('bcompagnie')->constrained('compagnies')->nullable();
+            $table->foreignId('btypebillet')->constrained('billetteries')->nullable();
+            $table->date('bdateDepart')->nullable();
+            $table->date('bdateRetoure')->nullable();
+            $table->integer('bprixachat')->nullable()->default(0);
+            $table->integer('bprixvente')->nullable()->default(0);
+            $table->integer('bqte')->nullable()->default(0);
+            $table->integer('btotal')->nullable()->default(0);
 
-            $table->foreignId('bcompagnie')->constrained('compagnies');
-            $table->foreignId('btypebillet')->constrained('billetteries');
-            $table->date('bdateDepart');
-            $table->date('bdateRetoure');
-            $table->integer('bprixachat');
-            $table->integer('bprixvente');
-            $table->integer('bqte');
-            $table->integer('btotal');
-
-
-            $table->integer('montant_a_payer');
-            $table->integer('montant_payer');
-            $table->integer('montant_rest_a_payer');
+            $table->integer('montant_a_payer')->default(0);
+            $table->integer('montant_payer')->default(0);
+            $table->integer('montant_rest_a_payer')->default(0);
 
             $table->timestamps();
         });

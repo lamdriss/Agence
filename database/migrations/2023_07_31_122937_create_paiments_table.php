@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->date('datepaiment');
             $table->date('dateEchance');
-            $table->ineteger('recu');
-            $table->ineteger('pieceN');
-            $table->ineteger('montantpaye');
+            $table->integer('recu');
+            $table->integer('pieceN');
+            $table->integer('montantpaye');
             $table->enum('sitaution',['Payer','Impayer']);
             $table->foreignId('modePaiment')->constrained('modepaimants');
             $table->timestamps();

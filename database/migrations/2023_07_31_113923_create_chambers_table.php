@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('chambers', function (Blueprint $table) {
             $table->id();
             $table->string('chambre');
+            $table->integer('nbrlit');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

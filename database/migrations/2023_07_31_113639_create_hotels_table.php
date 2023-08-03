@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('contact');
             $table->integer('telephone');
             $table->integer('fax');
-            $table->foreignId('ville')->constained('villes');
-            $table->foreignId('pays')->constained('pays');
+            $table->foreignId('ville')->constrained('villes');
+            $table->foreignId('pays')->constrained('pays');
             $table->timestamps();
         });
     }
